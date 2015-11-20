@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jjmsoftsolutions.jtracking</groupId>
+	<artifactId>jtracking-jpa</artifactId>
+	<version>0.0.1.RELEASE</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<org.springframework-version>4.1.2.RELEASE</org.springframework-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java-version>1.8</java-version>
+	</properties>
+
+	<organization>
+		<name>JJMSoftSolutions</name>
+		<url></url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>JJM100</id>
+			<name>Jonatha Jara Morales</name>
+			<email>jonathanjm100@gmail.com</email>
+			<roles>
+				<role>QA</role>
+				<role>Developer</role>
+				<role>CEO</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jjmsoftsolutions.jtracking</groupId>
+			<artifactId>jtracking-specification</artifactId>
+			<version>0.0.1.RELEASE</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>jtracking-jpa</finalName>
+	</build>
+
+</project>

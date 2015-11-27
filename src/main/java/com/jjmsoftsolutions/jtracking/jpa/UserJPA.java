@@ -4,16 +4,22 @@
  */
 package com.jjmsoftsolutions.jtracking.jpa;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.jjmsoftsolutions.jtracking.specification.Account;
+import com.jjmsoftsolutions.jtracking.specification.Membership;
 import com.jjmsoftsolutions.jtracking.specification.SingularId;
 import com.jjmsoftsolutions.jtracking.specification.User;
 /**
@@ -33,18 +39,21 @@ import com.jjmsoftsolutions.jtracking.specification.User;
 @Table(name = "Uzer")
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class UserEntity implements User {
+public class UserJPA implements User {
 
 	@Id
     @TableGenerator( name = "uzer_generator", table = "generated_keys", pkColumnName = "pk_column", valueColumnName = "value_column", pkColumnValue = "uzer_id", initialValue = 1, allocationSize = 1 )
     @GeneratedValue( strategy = GenerationType.TABLE, generator = "uzer_generator" )
 	private Integer id;
 	
-	@Column(name = "user_name", length = 20, nullable = false) private String userName;
+	@Column(name = "user_name", length = 20, nullable = false, unique = true) private String userName;
 	@Column(name = "email", length = 60, nullable = false, unique= true) private String email;
-	@Column(name = "password", length = 20) private String password;
+	@Column(name = "password", length = 20, nullable = false) private String password;
 	@Column(name = "name", length = 40) private String name;
 	@Column(name = "last_name", length = 40) private String lastName;
+	@Column(name = "authorization_Token", length = 100) private String authorizationToken;
+	@OneToMany(mappedBy="accountMember", targetEntity=MembershipJPA.class) private Set<Membership> memberShips;
+	private Account account;
 	
 	public Integer getId() {
 		return id;
@@ -93,4 +102,22 @@ public class UserEntity implements User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public String getAuthorizationToken() {
+		return authorizationToken;
+	}
+
+	public void setAutuhorizationToken(String authorizationToken) {
+		this.authorizationToken = authorizationToken;
+	}
+
+	@Override
+	public Account getAccount() {
+		return account;
+	}
+
+	@Override
+	public void setAccount(Account account) {
+		this.account = account;
+	}	
 }

@@ -4,22 +4,19 @@
  */
 package com.jjmsoftsolutions.jtracking.jpa;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import com.jjmsoftsolutions.jtracking.specification.Account;
-import com.jjmsoftsolutions.jtracking.specification.Membership;
 import com.jjmsoftsolutions.jtracking.specification.SingularId;
 import com.jjmsoftsolutions.jtracking.specification.User;
 /**
@@ -52,8 +49,7 @@ public class UserJPA implements User {
 	@Column(name = "name", length = 40) private String name;
 	@Column(name = "last_name", length = 40) private String lastName;
 	@Column(name = "authorization_Token", length = 100) private String authorizationToken;
-	@OneToMany(mappedBy="accountMember", targetEntity=MembershipJPA.class) private Set<Membership> memberShips;
-	private Account account;
+	@OneToOne(targetEntity=AccountJPA.class) @JoinColumn(name="account_id", unique=true, nullable=false) private Account account;
 	
 	public Integer getId() {
 		return id;
